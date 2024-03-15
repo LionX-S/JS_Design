@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.modal {
+				position: fixed;
+				width: 200px;
+				height: 200px;
+				line-height: 200px;
+				text-align: center;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				background-color: aquamarine;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 动态创建div -->
+		<!-- <div class="modal"></div> -->
+		<button id="open">打开</button>
+		<button id="close">关闭</button>
+
+		<script>
+			// 单例模式创建modal
+			const Modal = (function () {
+				let instance = null;
+				return function () {
+					if (!instance) {
+						instance = document.createElement("div");
+						instance.innerHTML = "我是模态框";
+						instance.className = "modal";
+						instance.style.display = "none";
+						document.body.appendChild(instance);
+					}
+					return instance;
+				};
+			})();
+			document.getElementById("open").onclick = function () {
+				// 创建modal
+				const modal = Modal();
+				modal.style.display = "block";
+			};
+			document.getElementById("close").onclick = function () {
+				const modal = Modal();
+				modal.style.display = "none";
+			};
+		</script>
+	</body>
+</html>
